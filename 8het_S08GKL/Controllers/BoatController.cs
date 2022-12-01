@@ -14,5 +14,19 @@ namespace _8het_S08GKL.Controllers
 
             return Ok(kérédesek);
         }
+
+        [HttpGet]
+        [Route("question/{sorszam}")]
+        public IActionResult GetQuestionFromId(int sorszam)
+        {
+            HajoContext ctx = new HajoContext();
+            var kerdes = (from x in ctx.Questions
+                          where x.QuestionId == sorszam
+                          select x).FirstOrDefault();
+
+            if (kerdes == null) return BadRequest("Nincs ilyen sorszámmal rendelkező kérdése");
+
+            return new JsonResult(kerdes);
+        }
     }
 }
