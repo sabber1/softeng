@@ -28,5 +28,12 @@ namespace _8het_S08GKL.Controllers
 
             return new JsonResult(kerdes);
         }
+        [HttpGet]
+        [Route("questions/count")]
+        public IActionResult GetQuestionsCount()
+        {
+            HajoContext context = new HajoContext();
+            return Ok(context.Questions.Count());
+        }
     }
 }
